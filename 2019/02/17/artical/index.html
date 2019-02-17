@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="发布博客">
+  <meta name="description" content="矩阵是处理数据的一种方法，秩是矩阵的重要性质。因此，用C语言求解矩阵的秩可以帮我们更好的处理数据。首先，我们   先来看平时我们是如何求矩阵的秩的：选定矩阵的一行，再选另外一行减去k倍的第一行，通过改变k的值，将该行中的元素尽  可能多的化为0，最后通过行交换将矩阵化为行阶梯式，记录不全为零的行的个数即可得到该矩阵的秩。用C语言求矩阵的秩时，  我们也可使用此思路，即通过行变换，将原矩阵A中[0]">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实验2">
+<meta property="og:title" content="用C语言求矩阵的秩">
 <meta property="og:url" content="http://LZRCode.github.io/2019/02/17/artical/index.html">
 <meta property="og:site_name" content="LZRCode">
-<meta property="og:description" content="发布博客">
+<meta property="og:description" content="矩阵是处理数据的一种方法，秩是矩阵的重要性质。因此，用C语言求解矩阵的秩可以帮我们更好的处理数据。首先，我们   先来看平时我们是如何求矩阵的秩的：选定矩阵的一行，再选另外一行减去k倍的第一行，通过改变k的值，将该行中的元素尽  可能多的化为0，最后通过行交换将矩阵化为行阶梯式，记录不全为零的行的个数即可得到该矩阵的秩。用C语言求矩阵的秩时，  我们也可使用此思路，即通过行变换，将原矩阵A中[0]">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-17T13:21:58.130Z">
+<meta property="og:updated_time" content="2019-02-17T15:03:32.337Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="实验2">
-<meta name="twitter:description" content="发布博客">
+<meta name="twitter:title" content="用C语言求矩阵的秩">
+<meta name="twitter:description" content="矩阵是处理数据的一种方法，秩是矩阵的重要性质。因此，用C语言求解矩阵的秩可以帮我们更好的处理数据。首先，我们   先来看平时我们是如何求矩阵的秩的：选定矩阵的一行，再选另外一行减去k倍的第一行，通过改变k的值，将该行中的元素尽  可能多的化为0，最后通过行交换将矩阵化为行阶梯式，记录不全为零的行的个数即可得到该矩阵的秩。用C语言求矩阵的秩时，  我们也可使用此思路，即通过行变换，将原矩阵A中[0]">
 
 
 
@@ -123,7 +123,7 @@
   };
 </script>
 
-  <title>实验2 | LZRCode</title>
+  <title>用C语言求矩阵的秩 | LZRCode</title>
   
 
 
@@ -322,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">实验2
+          <h1 class="post-title" itemprop="name headline">用C语言求矩阵的秩
 
               
             
@@ -348,7 +348,7 @@
                 
               
 
-              <time title="创建时间：2019-02-17 09:46:06 / 修改时间：21:21:58" itemprop="dateCreated datePublished" datetime="2019-02-17T09:46:06+08:00">2019-02-17</time>
+              <time title="创建时间：2019-02-17 09:46:06 / 修改时间：23:03:32" itemprop="dateCreated datePublished" datetime="2019-02-17T09:46:06+08:00">2019-02-17</time>
             
 
             
@@ -370,7 +370,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/搭建博客/" itemprop="url" rel="index"><span itemprop="name">搭建博客</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/C语言与矩阵/" itemprop="url" rel="index"><span itemprop="name">C语言与矩阵</span></a></span>
 
                 
                 
@@ -391,8 +391,6 @@
           
 
           
-            <div class="post-description">发布博客</div>
-          
 
         </div>
       </header>
@@ -407,7 +405,87 @@
       
 
       
-        <p>发布博客</p>
+        <pre><code>矩阵是处理数据的一种方法，秩是矩阵的重要性质。因此，用C语言求解矩阵的秩可以帮我们更好的处理数据。首先，我们
+</code></pre><p>  先来看平时我们是如何求矩阵的秩的：选定矩阵的一行，再选另外一行减去k倍的第一行，通过改变k的值，将该行中的元素尽<br>  可能多的化为0，最后通过行交换将矩阵化为行阶梯式，记录不全为零的行的个数即可得到该矩阵的秩。用C语言求矩阵的秩时，<br>  我们也可使用此思路，即通过行变换，将原矩阵A中[0][0]下方元素全化为零，在讲A[1][1]下方元素全化为0，以此类推，知道<br>  将矩阵化为行阶梯式。其代码实现如下：</p>
+<pre><code>    /*此处我们以一4*4矩阵为例*/  
+   float arr[4][4];
+
+   int main(void)
+  {
+   //定义所需的变量，具体意义在用到时详述
+   int i=0,j=0,R=0,k=0,np=0,i_in=0,j_in=0,s=0,t=0;
+   float get_arr=0,temp=0,mid=0,mid_arr=0;
+  //输入数组 i表示行，j表示列
+  for(i=0;i&lt;4;i++)
+ {
+   for(j=0;j&lt;4;j++)
+  {
+   printf(&quot;input the number of arr[%f][%f] &quot;,i,j);
+   scanf(&quot;%f&quot;,&amp;get_arr);
+   arr[i][j]=get_arr;
+  }
+ }
+ //显示输入矩阵 
+ printf(&quot;\n&quot;);
+ for(i=0;i&lt;4;i++)
+{
+ for(j=0;j&lt;4;j++)
+ {
+  printf(&quot;%f &quot;,arr[i][j]);
+  }
+  printf(&quot;\n&quot;);
+ }
+
+
+/*化为行阶梯式
+  求解方法：我们以第一列为例，我们想将通过行变换使第一列最多只有一个非零数，且这个非零数位于第一行。为此，
+            我们遍历这一列的元素，当出现一个非零数时，停止遍历，并将该行与第一行交换，使第一列第一行为非零
+            数，再确定k值，将第一列二，三，四行元素化为零。如果第一列全为0，则跳至第二列，重复上述过程。
+  变量意义：i表示行，j表示列，k表示检测到元素为非零数的次数，用于确定起始行
+            i_in也表示行，用于循环中防止i的值被改变，j_in同理。np，用于确定
+            一列是否全为0，如np=0则这一列为0
+            mid和temp均为赋值的传递变量；
+*/ 
+for(j=k;j&lt;4;j++)
+</code></pre><p>   {<br>    for(i=k;i&lt;4;i++)<br>    {<br>     if(arr[i][j]==0)<br>    {<br>      continue;<br>    }<br>     else<br>     {<br>      if(i&gt;k)//说明该列检测的第一个元素为0<br>      {<br>       i_in=i;<br>       j_in=j;<br>       //交换两行数据，将非零行置顶<br>       for(j_in=0;j_in&lt;4;j_in++)<br>        {<br>         temp=arr[i_in][j_in];<br>            arr[i_in][j_in]=arr[k][j_in];<br>            arr[k][j_in]=temp;<br>      }<br>     }<br>        //进行行计算<br>        for(i_in=k;i_in&lt;3;i_in++)<br>       {<br>    mid=arr[i_in+1][j]/arr[k][j];<br>     for(j_in=j;j_in&lt;4;j_in++)<br>     {<br>        mid_arr=arr[i_in+1][j_in]-mid*arr[k][j_in];<br>        arr[i_in+1][j_in]=mid_arr;<br>      }<br>    }<br>      k++;<br>      np++;<br>    }</p>
+<pre><code>  }
+
+  if(np==0)
+  {
+   j++;
+   np=0;
+   }else
+   {
+    np=0;
+}
+
+ }
+ //显示变换后矩阵 
+   printf(&quot;\n&quot;);
+   for(i=0;i&lt;4;i++)
+  {
+   for(j=0;j&lt;4;j++)
+   {
+     printf(&quot;%f &quot;,arr[i][j]);
+    }
+     printf(&quot;\n&quot;);
+   }
+
+ //求秩，遍历每行，只要有非0元素即可 
+   for(i=0;i&lt;4;i++)
+  {
+   for(j=0;j&lt;4;j++)
+   {
+    if(arr[i][j]!=0)
+    {
+    R++;
+    break;
+     }
+    }
+   }
+
+   printf(&quot;R of arr is %d&quot;,R);
+</code></pre><p>return 0;<br>      } </p>
 
       
     </div>
